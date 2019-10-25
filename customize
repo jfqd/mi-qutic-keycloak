@@ -1,0 +1,38 @@
+#!/usr/bin/bash
+
+PATH=/opt/local/gnu/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin
+
+# Exit if any command fails
+set -o errexit
+
+KEYCLOAK_VERSION="7.0.1"
+
+MUNIN_PLUGINS="
+  nginx
+"
+
+echo "* Activate munin plugins"
+/opt/qutic/bin/munin-node-plugins ${MUNIN_PLUGINS}
+
+echo "* Setup keycloak env"
+groupadd -g 1110 keycloak
+useradd -m -s /usr/bin/bash -d /opt/keycloak -u 1100 -g keycloak keycloak
+passwd -N keycloak
+passwd -d keycloak
+
+cd /opt/keycloak
+curl -LO https://download.qutic.com/src/keycloak/keycloak-${KEYCLOAK_VERSION}.tar.gz
+chown -R keycloak:keycloak /opt/keycloak
+
+# smf support
+sed -i \
+  "s#/opt/keycloak-@VER@.war#/opt/keycloak-${KEYCLOAK_VERSION}#" \
+  /opt/local/lib/svc/method/keycloak
+svccfg import /opt/local/lib/svc/manifest/keycloak.xml
+
+# Clean up
+echo "* Cleaning up."
+rm /root/customize
+
+# Prepare image for provisioning
+sm-prepare-image -y

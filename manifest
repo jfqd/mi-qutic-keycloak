@@ -1,0 +1,8 @@
+name="qutic-keycloak"
+organization="qutic development"
+brand="keycloak Instance"
+version="20181018.0"
+description="qutic keycloak image"
+homepage="https://github.com/jfqd/mi-qutic-keycloak"
+users="root keycloak"
+base="80eb3464-7ec3-11e9-8365-c32736cdd54f"
