@@ -30,7 +30,7 @@ fi
 
 case "$1" in
 start)
-    cd /opt/keycloak/keycloak-@VER@
+    cd /opt/keycloak/keycloak/bin
     ./standalone.sh &
     ;;
 *)

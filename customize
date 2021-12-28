@@ -11,9 +11,6 @@ MUNIN_PLUGINS="
   nginx
 "
 
-echo "* Activate munin plugins"
-/opt/qutic/bin/munin-node-plugins ${MUNIN_PLUGINS}
-
 echo "* Setup keycloak env"
 groupadd -g 1110 keycloak
 useradd -m -s /usr/bin/bash -d /opt/keycloak -u 1100 -g keycloak keycloak
@@ -22,7 +19,9 @@ passwd -d keycloak
 
 cd /opt/keycloak
 curl -LO https://download.qutic.com/src/keycloak/keycloak-${KEYCLOAK_VERSION}.tar.gz
+gtar xf keycloak-${KEYCLOAK_VERSION}.tar.gz
 chown -R keycloak:keycloak /opt/keycloak
+ln -nfs keycloak-${KEYCLOAK_VERSION} keycloak
 
 # smf support
 sed -i \
