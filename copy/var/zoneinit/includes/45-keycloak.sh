@@ -21,6 +21,7 @@ if mdata-get mysql_password 1>/dev/null 2>&1; then
     /opt/keycloak/keycloak/standalone/configuration/standalone.xml
 fi
 
+chown -R keycloak:keycloak /opt/keycloak
 svccfg import /opt/local/lib/svc/manifest/keycloak.xml
 svccfg enable svc:/network/keycloak:keycloak || true
 
@@ -30,4 +31,5 @@ cd /opt/keycloak/keycloak/
   -c "module add --name=com.mysql --resources=/opt/keycloak/keycloak/modules/system/layers/keycloak/com/mysql/main/mysql-connector-java-${MYSQLJ_VERSION}.jar --dependencies=javax.api,javax.transaction.api" \
   || true
 
+chown -R keycloak:keycloak /opt/keycloak
 svccfg restart svc:/network/keycloak:keycloak || true
