@@ -1,7 +1,7 @@
 name="qutic-keycloak"
 organization="qutic development"
 brand="keycloak Instance"
-version="20181018.0"
+version="20201019.0"
 description="qutic keycloak image"
 homepage="https://github.com/jfqd/mi-qutic-keycloak"
 users="root keycloak"

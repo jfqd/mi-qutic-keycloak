@@ -1,5 +1,11 @@
 # Changelog
 
+## 20201019.0
+
+* use latest keycloak with mysql
+* use latest base image
+* use openjdk11
+
 ## 20181018.0
 
 * First release
