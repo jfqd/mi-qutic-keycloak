@@ -22,4 +22,12 @@ if mdata-get mysql_password 1>/dev/null 2>&1; then
 fi
 
 svccfg import /opt/local/lib/svc/manifest/keycloak.xml
-svccfg enable /opt/local/lib/svc/manifest/keycloak.xml || true
+svccfg enable svc:/network/keycloak:keycloak || true
+
+sleep 60
+cd /opt/keycloak/keycloak/
+./bin/jboss-cli.sh \
+  -c "module add --name=com.mysql --resources=/opt/keycloak/keycloak/modules/system/layers/keycloak/com/mysql/main/mysql-connector-java-${MYSQLJ_VERSION}.jar --dependencies=javax.api,javax.transaction.api" \
+  || true
+
+svccfg restart svc:/network/keycloak:keycloak || true

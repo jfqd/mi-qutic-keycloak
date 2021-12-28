@@ -45,10 +45,6 @@ EOF
 mv /opt/keycloak/keycloak/standalone/configuration/standalone.xml /opt/keycloak/keycloak/standalone/configuration/standalone.xml.bak
 mv /var/tmp/standalone.xml /opt/keycloak/keycloak/standalone/configuration/standalone.xml
 
-cd /opt/keycloak/keycloak/
-./bin/jboss-cli.sh \
-  -c "module add --name=com.mysql --resources=opt/keycloak/keycloak/modules/system/layers/keycloak/com/mysql/main/mysql-connector-java-${MYSQLJ_VERSION}.jar --dependencies=javax.api,javax.transaction.api"
-
 chown -R keycloak:keycloak /opt/keycloak
 
 # Clean up
