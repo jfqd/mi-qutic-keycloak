@@ -43,13 +43,19 @@ cat >> module.xml << EOF
 </module>
 EOF
 mv /opt/keycloak/keycloak/standalone/configuration/standalone.xml /opt/keycloak/keycloak/standalone/configuration/standalone.xml.bak
-mv /var/tmp/standalone.xml /opt/keycloak/keycloak/standalone/configuration/standalone.xml
+mv /var/zoneinit/tmp/standalone.xml /opt/keycloak/keycloak/standalone/configuration/standalone.xml
+chmod 0640 /opt/keycloak/keycloak/standalone/configuration/standalone.xml
+
+sed -i \
+  "s#JAVA=\"java\"#JAVA=\"/opt/local/bin/java\"#" \
+  /opt/keycloak/keycloak/bin/standalone.sh
 
 chown -R keycloak:keycloak /opt/keycloak
 
 # Clean up
 echo "* Cleaning up."
 rm /root/customize
+rm -rf /var/zoneinit/tmp
 
 # Prepare image for provisioning
 sm-prepare-image -y
