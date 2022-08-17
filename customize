@@ -20,6 +20,7 @@ curl -LO https://download.qutic.com/src/keycloak/keycloak-${KEYCLOAK_VERSION}.ta
 gtar xf keycloak-${KEYCLOAK_VERSION}.tar.gz
 rm keycloak-${KEYCLOAK_VERSION}.tar.gz
 ln -nfs keycloak-${KEYCLOAK_VERSION} keycloak
+echo -n "${MYSQLJ_VERSION}" > MYSQLJ_VERSION
 
 echo "* Setup keycloak mysql"
 mkdir -p /opt/keycloak/keycloak/modules/system/layers/keycloak/com/mysql/main

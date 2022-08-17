@@ -26,6 +26,7 @@ svccfg import /opt/local/lib/svc/manifest/keycloak.xml
 svccfg enable svc:/network/keycloak:keycloak || true
 
 sleep 60
+MYSQLJ_VERSION=$(cat /opt/keycloak/MYSQLJ_VERSION | tr -d " \t\n\r")
 cd /opt/keycloak/keycloak/
 ./bin/jboss-cli.sh \
   -c "module add --name=com.mysql --resources=/opt/keycloak/keycloak/modules/system/layers/keycloak/com/mysql/main/mysql-connector-java-${MYSQLJ_VERSION}.jar --dependencies=javax.api,javax.transaction.api" \
