@@ -25,5 +25,5 @@
     "zabbix_pski":              {"type": "text", "description": "zabbix PSKIdentity"},
     "zabbix_psk":               {"type": "text", "description": "zabbix PSK"},
     "logstash_redis":           {"type": "text", "description": "ip addresses of the logstash redis nodes, seperated by comma and including redis-protocoll"},
-    "nginx_ssl":                {"type": "text", "description": "ssl certificate for dsapid web interface"}
+    "nginx_ssl":                {"type": "text", "description": "ssl certificate for keycloak web interface"}
 }
